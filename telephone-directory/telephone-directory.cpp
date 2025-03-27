@@ -11,7 +11,7 @@ using namespace std;
 class directory
 {
 	int PhNo;
-	char fname[50], lname [50];
+	std::string fname, lname;
 	
 	public:
 		string getpword()
@@ -25,24 +25,25 @@ class directory
 	{
 		goto oo;
 	}	
-	while(ch!=13)
-	{
-		if(ch==8)
-		{
-			if(pass.size()==0)
-			{	
-				goto ps;
-			}
-			pass.erase(pass.size()-1);
-			cout << "\b \b";
-			ps:
-			goto pp;
-		}
-		pass.push_back(ch);
-		cout << "*";
-		pp:
-		ch=getch();
-	}
+	while (ch != 13) 
+    {
+        if (ch == 8) 
+        {
+            if (!pass.empty()) 
+            {
+                pass.pop_back(); 
+                cout << "\b \b"; 
+            }
+        }
+        else 
+        {
+            pass.push_back(ch);
+            cout << "*";
+        }
+
+        pp: 
+        ch = getch();
+    }
 	return pass;
 }
 int check(string a)
